@@ -38,7 +38,7 @@ const CartItem = ({ onContinueShopping, setAddedToCart }) => {
   const handleDecrement = (item) => {
     console.log(item)
     if (item.quantity === 1) {
-      dispatch(removeItem(item.name))
+      handleRemove(item)
     } else {
       const updatedItem = {
         ...item,
