@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function ProductList() {
   const [showCart, setShowCart] = useState(false)
   const [showPlants, setShowPlants] = useState(false) // State to control the visibility of the About Us page
-  const [addedToCart, setAddedToCart] = useState()
+  const [addedToCart, setAddedToCart] = useState({})
   const [totalQuantity, setTotalQuantity] = useState(0)
 
   const cart = useSelector((state) => state.cart.items)
@@ -373,10 +373,15 @@ function ProductList() {
                     <p>{plant.description}</p>
                     <div className="product-price">{plant.cost}</div>
                     <button
-                      className="product-button"
+                      className={`product-button ${
+                        addedToCart[plant.name] ? 'added-to-cart' : ''
+                      }`}
                       onClick={() => handleAddToCart(plant)}
+                      disabled={addedToCart[plant.name] ? true : false}
                     >
-                      Add to Cart
+                      {addedToCart[plant.name]
+                        ? 'added to cart'
+                        : 'Add to Cart'}
                     </button>
                   </div>
                 ))}
